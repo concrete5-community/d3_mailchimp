@@ -1,3 +1,6 @@
+3.0.1
+- Use view.js instead of requireAsset.
+
 3.0
 - Use AJAX for form submission.
 - Remove 5.7 compatibility. (now v8+)

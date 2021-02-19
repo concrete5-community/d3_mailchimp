@@ -72,9 +72,6 @@ class Controller extends BlockController
     {
         $al = AssetList::getInstance();
 
-        $al->register('javascript', 'd3_mailchimp/submitter', 'blocks/d3_mailchimp/js_files/submitter.js', [], 'd3_mailchimp');
-        $this->requireAsset('javascript', 'd3_mailchimp/submitter');
-
         if ((int) $this->styling === 1) {
             $al->register('css', 'd3_mailchimp/styling', 'blocks/d3_mailchimp/css_files/basic.css', [], 'd3_mailchimp');
             $this->requireAsset('css', 'd3_mailchimp/styling');
