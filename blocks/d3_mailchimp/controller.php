@@ -26,13 +26,6 @@ class Controller extends BlockController
     protected $mc;
     protected $cfg;
 
-    public function on_start()
-    {
-        $this->cfg = Core::make('config/database');
-
-        $this->mc = new MailChimp($this->cfg->get('d3_mailchimp.settings.api_key'));
-    }
-
     public function getBlockTypeName()
     {
         return t('MailChimp subscribe');
@@ -43,6 +36,13 @@ class Controller extends BlockController
         $p = Package::getByHandle('d3_mailchimp');
 
         return $p->getPackageDescription();
+    }
+
+    public function on_start()
+    {
+        $this->cfg = Core::make('config/database');
+
+        $this->mc = new MailChimp($this->cfg->get('d3_mailchimp.settings.api_key'));
     }
 
     public function view($bId = false)
@@ -103,6 +103,14 @@ class Controller extends BlockController
         }
 
         $this->set('errors', $error);
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasApiKey()
+    {
+        return $this->mc->hasApiKey();
     }
 
     /**

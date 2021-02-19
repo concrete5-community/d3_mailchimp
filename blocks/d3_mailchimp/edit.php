@@ -1,5 +1,17 @@
 <?php  
 defined('C5_EXECUTE') or die("Access Denied.");
+
+if (!$controller->hasApiKey()) {
+    echo t('Please <a href="%s">add an API key</a> first.', URL::to('dashboard/d3_mailchimp/settings/'));
+    return;
+}
+
+$lists_options = $controller->getListOptions();
+
+if (count($lists_options) === 0) {
+    echo t('<a target="_blank" href="%s">Please create a MailChimp list.</a>', 'https://admin.mailchimp.com/lists/');
+    return;
+}
 ?>
 
 <div class="form-group">
@@ -9,13 +21,7 @@ defined('C5_EXECUTE') or die("Access Denied.");
 
 	<div class="input">
 		<?php  
-        $options = $controller->getListOptions();
-
-        if (count($options) === 0) {
-            $options[0] = t('Please create a list in MailChimp first');
-        }
-
-        echo $form->select('list_id', $options, $list_id);
+        echo $form->select('list_id', $lists_options, $list_id);
         ?>
 	</div>
 </div>
@@ -35,10 +41,13 @@ defined('C5_EXECUTE') or die("Access Denied.");
 	</div>
 </div>
 
+<hr />
+
 <div class="form-group">
 	<?php  
     echo $form->label('merge_fields', t('Merge fields (comma separated)'));
     ?>
+    <i class="fa fa-question-circle launch-tooltip" title="<?php  echo t('Developers: If you have custom merge fields you need to override view.php.') ?>"></i>
 	
 	<div class="input">
 		<?php  
@@ -46,7 +55,3 @@ defined('C5_EXECUTE') or die("Access Denied.");
         ?>
 	</div>
 </div>
-
-<p>
-	<?php     echo t('If you have custom merge fields you can override the view.php and add the merge fields above.') ?>
-</p>

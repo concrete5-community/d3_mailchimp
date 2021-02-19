@@ -1,10 +1,10 @@
 <?php      
 defined('C5_EXECUTE') or die("Access Denied.");
 
-$token = \Core::make('token');
+$token = Core::make('token');
 ?>
 
-<div class="d3-mailchimp d3-mailchimp-<?php     echo $bID ?>">
+<div class="d3-mailchimp d3-mailchimp-<?php  echo $bID ?>">
 	<?php    
 	if (isset($errors)) {
 		$errors->output();
