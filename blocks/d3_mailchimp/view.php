@@ -6,6 +6,8 @@ defined('C5_EXECUTE') or die('Access Denied.');
 /** @var Concrete\Core\Error\ErrorList\ErrorList $errors */
 /** @var string $message */
 /** @var int $bID */
+/** @var bool $showTermsCheckbox */
+/** @var string $acceptTermsText */
 ?>
 
 <div class="d3-mailchimp" data-block-id="<?php echo $bID; ?>">
@@ -45,6 +47,23 @@ defined('C5_EXECUTE') or die('Access Denied.');
 				]);
 				?>
 			</div>
+
+            <?php
+            if ($showTermsCheckbox) {
+                ?>
+                <div class="accept-terms">
+                    <label for="accept_terms">
+                        <?php
+                        echo $form->checkbox('accept_terms', 1, 0, [
+                            'required' => 'required',
+                        ]);
+                        ?>
+                        <?php echo $acceptTermsText; ?>
+                    </label>
+                </div>
+                <?php
+            }
+            ?>
 
 			<div class="submit-button">
 				<?php 

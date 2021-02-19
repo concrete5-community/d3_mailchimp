@@ -13,6 +13,11 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http:/
 		</field>
 		<field name="mergeFields" type="string" size="255">
 		</field>
+		<field name="showTermsCheckbox" type="boolean">
+			<default value="0" />
+		</field>
+		<field name="acceptTermsText" type="text">
+		</field>
 		<field name="styling" type="integer">
 			<default value="1"/>
 		</field>

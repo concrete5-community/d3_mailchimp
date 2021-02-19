@@ -8,13 +8,14 @@ use A3020\D3Mailchimp\Subscribe;
 use Concrete\Core\Asset\AssetList;
 use Concrete\Core\Block\BlockController;
 use Concrete\Core\Config\Repository\Repository;
+use Concrete\Core\Editor\LinkAbstractor;
 use Concrete\Core\Http\Request;
 use Exception;
 
 class Controller extends BlockController
 {
-    protected $btInterfaceWidth = "450";
-    protected $btInterfaceHeight = "400";
+    protected $btInterfaceWidth = "800";
+    protected $btInterfaceHeight = "600";
     protected $btWrapperClass = 'ccm-ui';
     protected $btTable = "btD3Mailchimp";
     protected $btDefaultSet = "form";
@@ -41,6 +42,9 @@ class Controller extends BlockController
     /** @var int */
     protected $styling;
 
+    /** @var string */
+    protected $acceptTermsText;
+
     public function getBlockTypeName()
     {
         return t('MailChimp Subscribe');
@@ -66,6 +70,7 @@ class Controller extends BlockController
         }
 
         $this->set('errors', $this->error);
+        $this->set('acceptTermsText', $this->getAcceptTermsText());
     }
 
     public function registerViewAssets($outputContent = '')
@@ -121,6 +126,19 @@ class Controller extends BlockController
     public function edit()
     {
         $this->addEdit();
+
+        $this->acceptTermsText = $this->getAcceptTermsTextEditor();
+    }
+
+    public function save($args)
+    {
+        $args['showTermsCheckbox'] = empty($args['showTermsCheckbox']) ? 0 : $args['showTermsCheckbox'];
+
+        if (isset($args['acceptTermsText'])) {
+            $args['acceptTermsText'] = LinkAbstractor::translateTo($args['acceptTermsText']);
+        }
+
+        parent::save($args);
     }
 
     private function addEdit()
@@ -209,5 +227,17 @@ class Controller extends BlockController
         $config = $this->app->make(Repository::class);
 
         return (string) $config->get('d3_mailchimp.settings.api_key');
+    }
+
+    private function getAcceptTermsText()
+    {
+        $text = LinkAbstractor::translateFrom($this->acceptTermsText);
+
+        return !empty($text) ? $text : t('I accept the terms of use');
+    }
+
+    private function getAcceptTermsTextEditor()
+    {
+        return LinkAbstractor::translateFromEditMode($this->acceptTermsText);
     }
 }

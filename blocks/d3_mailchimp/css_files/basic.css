@@ -9,3 +9,8 @@
 .d3-mailchimp .button {
     margin-top: 5px;
 }
+
+.d3-mailchimp .accept-terms p {
+    margin: 0;
+    display: inline-block;
+}

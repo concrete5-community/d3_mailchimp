@@ -1,3 +1,8 @@
+3.1.0
+- Add 'Accept terms' checkbox for GDPR.
+- Add RTF-field to change the accept terms checkbox text.
+- Make sure block type is refreshed when upgrading.
+
 3.0.1
 - Use view.js instead of requireAsset.
 

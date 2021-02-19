@@ -14,6 +14,7 @@ class Installer
         $this->installBlockTypes($pkg);
         $this->installPages($pkg);
         $this->deleteOldPages();
+        $this->refresh();
     }
 
     private function installBlockTypes($pkg)
@@ -52,6 +53,14 @@ class Installer
             if ($page && !$page->isError()) {
                 $page->delete();
             }
+        }
+    }
+
+    private function refresh()
+    {
+        $bt = BlockType::getByHandle('d3_mailchimp');
+        if (is_object($bt)) {
+            $bt->refresh();
         }
     }
 }

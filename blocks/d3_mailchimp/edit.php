@@ -8,6 +8,8 @@ defined('C5_EXECUTE') or die('Access Denied.');
 /** @var string $listId */
 /** @var array $subscribeActions */
 /** @var string $subscribeAction */
+/** @var string $showTermsCheckbox */
+/** @var string $acceptTermsText */
 /** @var string $mergeFields */
 /** @var int $styling */
 
@@ -55,6 +57,24 @@ if (count($listOptions) === 0) {
         1 => t('Basic styling'),
         0 => t('No styling'),
     ], $styling);
+    ?>
+</div>
+
+<div class="form-group">
+    <label>
+        <?php
+        echo $form->checkbox('showTermsCheckbox', 1, $showTermsCheckbox);
+        ?>
+        <?php echo t('Show accept terms checkbox'); ?>
+    </label>
+</div>
+
+<div class="form-group">
+    <?php
+    echo $form->label('acceptTermsText', t('Accept terms text'));
+
+    $editor = $app->make('editor');
+    echo $editor->outputStandardEditor('acceptTermsText', $acceptTermsText);
     ?>
 </div>
 
