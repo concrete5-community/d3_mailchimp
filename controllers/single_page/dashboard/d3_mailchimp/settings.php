@@ -14,7 +14,7 @@ class Settings extends DashboardPageController
 
     public function save()
     {
-        $config = Core::make(Repository::class);
+        $config = Core::make('config');
         $token = Core::make('token');
 
         if ($token->validate('d3_mailchimp.settings.save')) {

@@ -216,7 +216,7 @@ class Controller extends BlockController
      */
     protected function getApiKey()
     {
-        $config = Core::make(Repository::class);
+        $config = Core::make('config');
         return (string) $config->get('d3_mailchimp.settings.api_key');
     }
 }

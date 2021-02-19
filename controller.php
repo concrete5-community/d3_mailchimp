@@ -11,7 +11,7 @@ class Controller extends Package
 {
     protected $pkgHandle = 'd3_mailchimp';
     protected $appVersionRequired = '5.7.5';
-    protected $pkgVersion = '2.0.1';
+    protected $pkgVersion = '2.0.2';
 
     protected $single_pages = [
         '/dashboard/d3_mailchimp' => [
