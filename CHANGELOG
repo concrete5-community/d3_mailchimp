@@ -1,0 +1,32 @@
+3.0
+- Use AJAX for form submission.
+- Remove 5.7 compatibility. (now v8+)
+- Add setting to enable/disable CSS styling.
+- Move dashboard page to System & Settings / Email / Mailchimp.
+- Rename block to 'MailChimp Subscribe'.
+- Fix 'API key' error when adding a block.
+- Make links to MailChimp website clearer via buttons.
+- Add 'post install' dialog to first enter an API key.
+
+2.0.2
+- Fix compatibility issue for 5.7.5.2.
+
+2.0.1
+- Added German translations (thanks to @arlenesey)
+
+2.0 (not backwards compatible)
+- Config values are now written to a file
+- Use PHP 5.4 syntax
+- Overall rewrite to make it easier to override files and methods
+
+1.1
+- Code improvements
+- Fixed subscription status check
+- Irmproved edit block UI
+- Added link to create API key
+- Added link to create a MailChimp list
+
+1.0.4
+- Compatibility fix for pre concrete 5.7.5.
+- PSR fixes.
+- Remove deprecated isPost check.

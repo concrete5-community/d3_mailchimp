@@ -1,13 +1,25 @@
-<?php  
-defined('C5_EXECUTE') or die("Access Denied.");
+<?php
+
+defined('C5_EXECUTE') or die('Access Denied.');
+
+/** @var \Concrete\Core\Application\Application $app */
+/** @var bool $hasApiKey */
+/** @var array $listOptions */
+/** @var string $listId */
+/** @var array $subscribeActions */
+/** @var string $subscribeAction */
+/** @var string $mergeFields */
+/** @var int $styling */
 
 if (!$hasApiKey) {
-    echo t('Please <a href="%s">add an API key</a> first.', URL::to('dashboard/d3_mailchimp/settings/'));
+    echo '<p>'.t('Please add an API key first.').'</p>';
+    echo '<a class="btn btn-primary" target="_blank" href="'.$app->make('url/manager')->resolve(['/dashboard/system/mail/mailchimp']).'">'.t('Add API key').'</a>';
     return;
 }
 
 if (count($listOptions) === 0) {
-    echo t('<a target="_blank" href="%s">Please create a MailChimp list.</a>', 'https://admin.mailchimp.com/lists/');
+    echo '<p>'.t('Please create a MailChimp List first.').'</p>';
+    echo '<a class="btn btn-primary" target="_blank" href="https://admin.mailchimp.com/lists/">'.t('Create List').'</a>';
     return;
 }
 ?>
@@ -36,7 +48,15 @@ if (count($listOptions) === 0) {
 	</div>
 </div>
 
-<hr>
+<div class="form-group">
+    <?php
+    echo $form->label('styling', t('Styling').' *');
+    echo $form->select('styling', [
+        1 => t('Basic styling'),
+        0 => t('No styling'),
+    ], $styling);
+    ?>
+</div>
 
 <div class="form-group">
 	<?php  

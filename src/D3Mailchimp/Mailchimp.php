@@ -1,26 +1,19 @@
-<?php  
-namespace Concrete\Package\D3Mailchimp\Src;
+<?php
+
+namespace A3020\D3Mailchimp;
 
 use Exception;
 
 /**
  * MailChimp API v3.
  **/
-class MailChimp
+class Mailchimp
 {
     protected $api_key;
 
     public function __construct($api_key = false)
     {
         $this->api_key = $api_key;
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasApiKey()
-    {
-        return !empty($this->api_key);
     }
 
     /**
@@ -31,7 +24,7 @@ class MailChimp
      * @param string $list_id
      * @param array $data
      *
-     * @return false | string (subscribed, unsubscribed, cleaned, pending)
+     * @return false|string (subscribed, unsubscribed, cleaned, pending)
      **/
     public function getSubscriptionStatus($list_id, $data)
     {
@@ -106,7 +99,7 @@ class MailChimp
         $dataCenter = substr($this->api_key, strpos($this->api_key, '-') + 1);
 
         if (empty($dataCenter)) {
-            throw new Exception("Invalid API key");
+            throw new Exception(t('Invalid API key'));
         }
 
         $url = 'https://' . $dataCenter . '.api.mailchimp.com/3.0/'.$endpoint;

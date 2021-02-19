@@ -1,10 +1,14 @@
-<?php      
-defined('C5_EXECUTE') or die("Access Denied.");
+<?php
 
-$token = Core::make('token');
+defined('C5_EXECUTE') or die('Access Denied.');
+
+/** @var Concrete\Core\Validation\CSRF\Token $token */
+/** @var Concrete\Core\Error\ErrorList\ErrorList $errors */
+/** @var string $message */
+/** @var int $bID */
 ?>
 
-<div class="d3-mailchimp d3-mailchimp-<?php  echo $bID ?>" id="b<?php  echo $bID ?>">
+<div class="d3-mailchimp" data-block-id="<?php echo $bID; ?>">
 	<?php 
 	if (isset($errors)) {
 		$errors->output();
@@ -14,8 +18,8 @@ $token = Core::make('token');
 		echo '<p class="message">'.$message.'</p>';
 	} else {
 		?>
-		<form method="post" action="<?php  echo $this->action('submit') ?>#b<?php  echo $bID ?>">
-			<?php  $token->output('d3_mailchimp.subscribe'); ?>
+		<form method="post" action="<?php echo $this->action('submit') ?>" onsubmit="d3_mailchimp_submit(this); return false;">
+			<?php $token->output('d3_mailchimp.subscribe'); ?>
 	
 			<div class="first-name">
 				<?php    
@@ -45,7 +49,7 @@ $token = Core::make('token');
 			<div class="submit-button">
 				<?php 
 				echo $form->submit('submit', t('Submit'), [
-					'class' => 'button'
+					'class' => 'button',
 				]);
 				?>
 			</div>
