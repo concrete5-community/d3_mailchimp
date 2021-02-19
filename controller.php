@@ -10,7 +10,7 @@ class Controller extends Package
 {
     protected $pkgHandle = 'd3_mailchimp';
     protected $appVersionRequired = '8.0';
-    protected $pkgVersion = '3.1.0';
+    protected $pkgVersion = '3.1.1';
     protected $pkgAutoloaderRegistries = [
         'src/D3Mailchimp' => '\A3020\D3Mailchimp',
     ];
