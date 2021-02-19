@@ -1,99 +1,99 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: d3_mailchimp 1.1\n"
+"Project-Id-Version: d3_mailchimp 2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2016-04-27T06:54:09+00:00\n"
-"PO-Revision-Date: 2016-04-27 08:56+0200\n"
+"POT-Creation-Date: 2016-11-16T12:29:08+00:00\n"
+"PO-Revision-Date: 2016-11-16 13:33+0100\n"
 "Language: nl_NL\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Poedit 1.8.11\n"
 
-#: packages/d3_mailchimp/controller.php:29
+#: packages/d3_mailchimp/controller.php:26
 msgid "Form - MailChimp Subscribe"
 msgstr "Formulier - MailChimp Subscribe"
 
-#: packages/d3_mailchimp/controller.php:34
+#: packages/d3_mailchimp/controller.php:31
 msgid "Subscribe to MailChimp lists"
 msgstr "Abonneer op MailChimp lijsten"
 
-#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:31
+#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:40
 msgid "MailChimp subscribe"
 msgstr "MailChimp subscribe"
 
-#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:53
+#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:59
 msgid "No list has been selected"
 msgstr "Er is geen lijst geselecteerd"
 
-#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:58
+#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:76
 msgid "Invalid email address"
 msgstr "Ongeldig e-mailadres"
 
-#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:62
+#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:80
 msgid "Invalid token"
 msgstr "Ongeldig token"
 
-#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:76
+#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:112
 msgid "You are already subscribed to this list"
 msgstr "U bent al geabonneerd op deze lijst"
 
-#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:79
+#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:115
 msgid "You are already subscribed. Please confirm the subscription email."
 msgstr "U bent al geabonneerd. Bevestig a.u.b. de aanmeldingsemail."
 
-#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:82
+#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:118
 msgid "This email address bounced. Please use another email address"
 msgstr "Dit e-mailadres geeft problemen. Gebruik a.u.b. een ander e-mailadres."
 
-#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:94
+#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:130
 msgid "Thanks for your subscription!"
 msgstr "Bedankt voor uw aanmelding!"
 
-#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:96
+#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:132
 msgid "Please click on the link in the confirmation email to verify your subscription."
 msgstr "Klik a.u.b. op de link in de bevestigingsmail om uw aanmelding te voltooien."
 
-#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:99
+#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:135
 msgid "Something went wrong. Error: %s"
 msgstr "Er is iets fout gegaan. Foutmelding: %s"
 
-#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:155
+#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:187
 msgid "Lists not available"
 msgstr "Lijsten niet beschikbaar"
+
+#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:199
+msgid "Subscribe without verification email"
+msgstr "Abonneer zonder verificatie-email"
+
+#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:200
+msgid "Subscribe with verification email"
+msgstr "Abonneer met verificatie-email"
 
 #: packages/d3_mailchimp/blocks/d3_mailchimp/edit.php:5
 msgid "Please <a href=\"%s\">add an API key</a> first."
 msgstr "Voeg a.u.b. eerst een <a href=\"%s\">API-key</a> toe."
 
-#: packages/d3_mailchimp/blocks/d3_mailchimp/edit.php:12
+#: packages/d3_mailchimp/blocks/d3_mailchimp/edit.php:10
 msgid "<a target=\"_blank\" href=\"%s\">Please create a MailChimp list.</a>"
 msgstr "<a target=\"_blank\" href=\"%s\">Maak a.u.b. een MailChimp lijst aan.</a>"
 
-#: packages/d3_mailchimp/blocks/d3_mailchimp/edit.php:19
+#: packages/d3_mailchimp/blocks/d3_mailchimp/edit.php:17
 msgid "List"
 msgstr "Lijst"
 
-#: packages/d3_mailchimp/blocks/d3_mailchimp/edit.php:31
+#: packages/d3_mailchimp/blocks/d3_mailchimp/edit.php:29
 msgid "Subscribe action"
 msgstr "Manier van aanmelden"
 
-#: packages/d3_mailchimp/blocks/d3_mailchimp/edit.php:37
-msgid "Subscribe without verification email"
-msgstr "Abonneer zonder verificatie-email"
-
-#: packages/d3_mailchimp/blocks/d3_mailchimp/edit.php:38
-msgid "Subscribe with verification email"
-msgstr "Abonneer met verificatie-email"
-
-#: packages/d3_mailchimp/blocks/d3_mailchimp/edit.php:48
+#: packages/d3_mailchimp/blocks/d3_mailchimp/edit.php:43
 msgid "Merge fields (comma separated)"
 msgstr "Merge velden (kommagescheiden)"
 
-#: packages/d3_mailchimp/blocks/d3_mailchimp/edit.php:50
+#: packages/d3_mailchimp/blocks/d3_mailchimp/edit.php:46
 msgid "Developers: If you have custom merge fields you need to override view.php."
 msgstr "Ontwikkelaars: Als u custom merge velden nodig heeft, moet u view.php kopiëren."
 
@@ -101,19 +101,19 @@ msgstr "Ontwikkelaars: Als u custom merge velden nodig heeft, moet u view.php ko
 msgid "First name"
 msgstr "Voornaam"
 
-#: packages/d3_mailchimp/blocks/d3_mailchimp/view.php:29
+#: packages/d3_mailchimp/blocks/d3_mailchimp/view.php:31
 msgid "Last name"
 msgstr "Achternaam"
 
-#: packages/d3_mailchimp/blocks/d3_mailchimp/view.php:35
+#: packages/d3_mailchimp/blocks/d3_mailchimp/view.php:40
 msgid "Email address"
 msgstr "E-mailadres"
 
-#: packages/d3_mailchimp/blocks/d3_mailchimp/view.php:40
+#: packages/d3_mailchimp/blocks/d3_mailchimp/view.php:47
 msgid "Submit"
 msgstr "Verzenden"
 
-#: packages/d3_mailchimp/controllers/single_page/dashboard/d3_mailchimp/settings.php:21
+#: packages/d3_mailchimp/controllers/single_page/dashboard/d3_mailchimp/settings.php:17
 msgid "Settings saved"
 msgstr "Instellingen opgeslagen"
 
@@ -121,6 +121,6 @@ msgstr "Instellingen opgeslagen"
 msgid "API key"
 msgstr "API key"
 
-#: packages/d3_mailchimp/single_pages/dashboard/d3_mailchimp/settings.php:19
+#: packages/d3_mailchimp/single_pages/dashboard/d3_mailchimp/settings.php:21
 msgid "Save"
 msgstr "Opslaan"

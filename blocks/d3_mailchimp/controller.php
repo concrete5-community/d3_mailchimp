@@ -2,11 +2,13 @@
 namespace Concrete\Package\D3Mailchimp\Block\D3Mailchimp;
 
 use Concrete\Core\Block\BlockController;
+use Concrete\Core\Config\Repository\Repository;
+use Concrete\Core\Error\Error;
+use Concrete\Core\Http\Request;
+use Concrete\Core\Package\Package;
 use Concrete\Package\D3Mailchimp\Src\MailChimp;
 use Core;
 use Exception;
-use Package;
-use Request;
 
 class Controller extends BlockController
 {
@@ -23,8 +25,15 @@ class Controller extends BlockController
     protected $btCacheBlockOutputForRegisteredUsers = false;
     protected $btCacheBlockOutputLifetime = CACHE_LIFETIME;
 
+    /** @var MailChimp */
     protected $mc;
-    protected $cfg;
+
+    /** @var Error */
+    protected $error;
+
+    protected $subscribeAction;
+    protected $mergeFields;
+    protected $listId;
 
     public function getBlockTypeName()
     {
@@ -40,121 +49,174 @@ class Controller extends BlockController
 
     public function on_start()
     {
-        $this->cfg = Core::make('config/database');
-
-        $this->mc = new MailChimp($this->cfg->get('d3_mailchimp.settings.api_key'));
+        $this->mc = new MailChimp($this->getApiKey());
+        $this->error = Core::make('helper/validation/error');
     }
 
-    public function view($bId = false)
+    public function view()
     {
-        $error = Core::make('helper/validation/error');
-
-        if (empty($this->list_id)) {
-            $error->add(t('No list has been selected'));
+        if (empty($this->listId)) {
+            $this->error->add(t('No list has been selected'));
         }
 
-        if (Request::isPost() && $this->post($this->bID.'bID') == $this->bID) {
-            if (!Core::make('helper/validation/strings')->email($this->post($this->bID.'email_address'))) {
-                $error->add(t('Invalid email address'));
-            }
-
-            if (!Core::make('token')->validate('d3_mailchimp.subscribe')) {
-                $error->add(t('Invalid token'));
-            }
-
-            if (!$error->has()) {
-                $data = array(
-                    'email' => $this->post($this->bID.'email_address'),
-                    'status' => $this->subscribe_action,
-                    'merge_fields' => $this->getMergeFieldData(),
-                );
-
-                $subscriptionStatus = $this->mc->getSubscriptionStatus($this->list_id, $data);
-
-                switch ($subscriptionStatus) {
-                    case 'subscribed':
-                        $error->add(t("You are already subscribed to this list"));
-                        break;
-                    case 'pending':
-                        $error->add(t("You are already subscribed. Please confirm the subscription email."));
-                        break;
-                    case 'cleaned':
-                        $error->add(t("This email address bounced. Please use another email address"));
-                        break;
-                }
-
-                /*
-                Subscribe if email address isn't on the list (or not anymore)
-                */
-                if ($subscriptionStatus === false or $subscriptionStatus === 'unsubscribed') {
-                    try {
-                        $this->mc->subscribe($this->list_id, $data);
-
-                        if ($this->subscribe_action == 'subscribed') {
-                            $this->set("message", t("Thanks for your subscription!"));
-                        } else {
-                            $this->set("message", t("Please click on the link in the confirmation email to verify your subscription."));
-                        }
-                    } catch (Exception $e) {
-                        $error->add(t("Something went wrong. Error: %s", $e->getMessage()));
-                    }
-                }
-            }
+        $this->set('errors', $this->error);
+    }
+    
+    public function action_submit($bId = false)
+    {
+        if (!Request::isPost()) {
+            $this->view();
+            return;
         }
 
-        $this->set('errors', $error);
+        if ($bId !== $this->bID) {
+            $this->view();
+            return;
+        }
+
+        if (!Core::make('helper/validation/strings')->email($this->post('email_address'))) {
+            $this->error->add(t('Invalid email address'));
+        }
+
+        if (!Core::make('token')->validate('d3_mailchimp.subscribe')) {
+            $this->error->add(t('Invalid token'));
+        }
+
+        $data = [
+            'email' => $this->post('email_address'),
+            'status' => $this->subscribeAction,
+            'mergeFields' => $this->getMergeFieldData(),
+        ];
+
+        if (!$this->error->has()) {
+            $this->subscribe($data);
+        }
+
+        $this->view();
     }
 
-    /**
-     * @return bool
+    public function edit()
+    {
+        $this->set('hasApiKey', $this->hasApiKey());
+        $this->set('listOptions', $this->getListOptions());
+        $this->set('subscribeActions', $this->getSubscribeActions());
+    }
+
+	/**
+     * @param array $data
      */
-    public function hasApiKey()
+    protected function subscribe($data)
     {
-        return $this->mc->hasApiKey();
+        $subscriptionStatus = $this->mc->getSubscriptionStatus($this->listId, $data);
+
+        switch ($subscriptionStatus) {
+            case 'subscribed':
+                $this->error->add(t("You are already subscribed to this list"));
+                break;
+            case 'pending':
+                $this->error->add(t("You are already subscribed. Please confirm the subscription email."));
+                break;
+            case 'cleaned':
+                $this->error->add(t("This email address bounced. Please use another email address"));
+                break;
+        }
+
+        if ($subscriptionStatus !== false && $subscriptionStatus !== 'unsubscribed') {
+            return;
+        }
+
+        try {
+            $this->mc->subscribe($this->listId, $data);
+
+            if ($this->subscribeAction == 'subscribed') {
+                $this->set("message", t("Thanks for your subscription!"));
+            } else {
+                $this->set("message", t("Please click on the link in the confirmation email to verify your subscription."));
+            }
+        } catch (Exception $e) {
+            $this->error->add(t("Something went wrong. Error: %s", $e->getMessage()));
+        }
     }
 
     /**
+     * See: http://kb.mailchimp.com/merge-tags/getting-started-with-merge-tags
+     *
      * @return array
      **/
-    public function getMergeFieldData()
+    protected function getMergeFieldData()
     {
-        $merge_fields = array('FNAME', 'LNAME');
+        $mergeFields = ['FNAME', 'LNAME'];
 
-        if ($this->merge_fields) {
-            $fields = explode(',', $this->merge_fields);
+        if ($this->mergeFields) {
+            $fields = explode(',', $this->mergeFields);
 
             if (count($fields) > 0) {
-                $merge_fields = array_merge($merge_fields, $fields);
+                $mergeFields = array_merge($mergeFields, $fields);
             }
         }
 
-        $data = array();
-        foreach ($merge_fields as $field) {
-            $data[$field] = trim($this->post($this->bID.$field));
+        $data = [];
+        foreach ($mergeFields as $field) {
+            $value = trim($this->post($field));
+            if (!empty($value)) {
+                $data[$field] = $value;
+            }
         }
 
         return $data;
     }
 
     /**
+     * MailChimp Lists.
+     *
+     * See: http://kb.mailchimp.com/lists
+     *
      * @return array (ID + Name)
      **/
-    public function getListOptions()
+    protected function getListOptions()
     {
-        $list_options = array();
+        $listOptions = [];
 
         try {
             $lists = $this->mc->getLists();
 
             if ($lists) {
                 foreach ($lists as $list) {
-                    $list_options[$list['id']] = $list['name'];
+                    $listOptions[$list['id']] = $list['name'];
                 }
             }
         } catch (Exception $e) {
-            $list_options[''] = t('Lists not available');
+            $listOptions[''] = t('Lists not available');
         }
 
-        return $list_options;
+        return $listOptions;
+    }
+
+	/**
+     * @return array
+     */
+    protected function getSubscribeActions()
+    {
+        return [
+            'subscribed' => t('Subscribe without verification email'),
+            'pending' => t('Subscribe with verification email'),
+        ];
+    }
+
+	/**
+     * @return bool
+     */
+    protected function hasApiKey()
+    {
+        return !empty($this->getApiKey());
+    }
+
+	/**
+     * @return string
+     */
+    protected function getApiKey()
+    {
+        $config = Core::make(Repository::class);
+        return (string) $config->get('d3_mailchimp.settings.api_key');
     }
 }

@@ -1,28 +1,26 @@
 <?php  
 namespace Concrete\Package\D3Mailchimp;
 
-use BlockType;
-use Package;
-use Page;
-use SinglePage;
+use Concrete\Core\Block\BlockType\BlockType;
+use Concrete\Core\Package\Package;
+use Concrete\Core\Page\Page;
+use Concrete\Core\Page\Single;
+use Exception;
 
-/**
- * @author akodde
- **/
 class Controller extends Package
 {
     protected $pkgHandle = 'd3_mailchimp';
-    protected $appVersionRequired = '5.7.0.4';
-    protected $pkgVersion = '1.1';
+    protected $appVersionRequired = '5.7.5';
+    protected $pkgVersion = '2.0';
 
-    protected $single_pages = array(
-        '/dashboard/d3_mailchimp' => array(
+    protected $single_pages = [
+        '/dashboard/d3_mailchimp' => [
             'cName' => 'MailChimp',
-        ),
-        '/dashboard/d3_mailchimp/settings' => array(
+        ],
+        '/dashboard/d3_mailchimp/settings' => [
             'cName' => 'MailChimp settings',
-        ),
-    );
+        ],
+    ];
 
     public function getPackageName()
     {
@@ -37,14 +35,21 @@ class Controller extends Package
     public function install()
     {
         $pkg = parent::install();
-
         $this->installEverything($pkg);
+    }
+
+    public function upgradeCoreData()
+    {
+        if (version_compare($this->pkgVersion, 2.0, '<')) {
+            throw new Exception(t("This version is not backwards compatible. Uninstall the previous version first to be able to install this version."));
+        }
+
+        parent::upgradeCoreData();
     }
 
     public function upgrade()
     {
         $pkg = parent::getByHandle($this->pkgHandle);
-
         $this->installEverything($pkg);
     }
 
@@ -66,11 +71,12 @@ class Controller extends Package
         foreach ($this->single_pages as $path => $value) {
             if (!is_array($value)) {
                 $path = $value;
-                $value = array();
+                $value = [];
             }
+
             $page = Page::getByPath($path);
             if (!$page || $page->isError()) {
-                $single_page = SinglePage::add($path, $pkg);
+                $single_page = Single::add($path, $pkg);
 
                 if ($value) {
                     $single_page->update($value);

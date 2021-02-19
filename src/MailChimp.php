@@ -53,21 +53,24 @@ class MailChimp
      *
      * @link http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/#edit-put_lists_list_id_members_subscriber_hash
      *
-     * @param string $list_id
+     * @param string $listId
      * @param array $data
      *
      * @throws Exception
      **/
-    public function subscribe($list_id, $data)
+    public function subscribe($listId, $data)
     {
-        $email_hash = md5(strtolower($data['email']));
-        $endpoint = 'lists/' . $list_id . '/members/' . $email_hash;
+        $emailHash = md5(strtolower($data['email']));
+        $endpoint = 'lists/' . $listId . '/members/' . $emailHash;
 
-        $arguments = array(
+        $arguments = [
             'email_address' => $data['email'],
             'status' => $data['status'],
-            'merge_fields' => $data['merge_fields'],
-        );
+        ];
+
+        if (count($data['mergeFields'])) {
+            $arguments['merge_fields'] = $data['mergeFields'];
+        };
 
         $this->sendRequest($endpoint, $arguments, 'PUT');
     }
@@ -110,7 +113,7 @@ class MailChimp
 
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_USERPWD, 'user:' . $this->api_key);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 10);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);

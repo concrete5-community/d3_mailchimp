@@ -5,8 +5,8 @@
 			<unsigned/>
 			<key/>
 		</field>
-		<field name="list_id" type="C" size="15"></field>
-		<field name="subscribe_action" type="C" size="20"></field>
-		<field name="merge_fields" type="C" size="255"></field>
+		<field name="listId" type="C" size="15"></field>
+		<field name="subscribeAction" type="C" size="20"></field>
+		<field name="mergeFields" type="C" size="255"></field>
 	</table>
 </schema>
