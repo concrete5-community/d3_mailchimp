@@ -1,8 +1,10 @@
-<?php    
+<?php     
 namespace Concrete\Package\D3Mailchimp\Block\D3Mailchimp;
 
+use Core;
 use Concrete\Package\D3Mailchimp\Src\MailChimp;
 use Concrete\Core\Block\BlockController;
+use Exception;
 use Package;
 
 class Controller extends BlockController 
@@ -25,7 +27,7 @@ class Controller extends BlockController
 	
 	public function on_start()
 	{
-		$this->cfg = \Core::make('config/database');
+		$this->cfg = Core::make('config/database');
 		
 		$this->mc = new MailChimp($this->cfg->get('d3_mailchimp.settings.api_key'));	
 	}
@@ -43,23 +45,19 @@ class Controller extends BlockController
 	
 	public function view($bId = false)
 	{
-		$error = \Core::make('helper/validation/error');
+		$error = Core::make('helper/validation/error');
 		
 		if (empty($this->list_id)) {
 			$error->add(t('No list has been selected'));
 		}
 		
 		if ($this->request->isPost() && $this->post($this->bID.'bID') == $this->bID) {
-			if (!\Core::make('helper/validation/strings')->email($this->post($this->bID.'email_address'))) {
+			if (!Core::make('helper/validation/strings')->email($this->post($this->bID.'email_address'))) {
 				$error->add(t('Invalid email address'));
 			}
 		
-			if (!\Core::make('token')->validate('d3_mailchimp.subscribe')) {
+			if (!Core::make('token')->validate('d3_mailchimp.subscribe')) {
 				$error->add(t('Invalid token'));	
-			}
-		
-			if (empty($this->list_id)) {
-				$error->add(t('No list has been selected'));
 			}
 		
 			if (!$error->has()) {
@@ -95,7 +93,7 @@ class Controller extends BlockController
 						} else {
 							$this->set("message", t("Please click on the link in the confirmation email to verify your subscription."));
 						}
-					} catch (\Exception $e) {
+					} catch (Exception $e) {
 						$error->add(t("Something went wrong. Error: %s", $e->getMessage()));
 					}
 				}
@@ -145,7 +143,7 @@ class Controller extends BlockController
 					$list_options[$list['id']] = $list['name'];
 				}
 			}
-		} catch (\Exception $e) {
+		} catch (Exception $e) {
 			$list_options[''] = t('Lists not available');
 		}
 

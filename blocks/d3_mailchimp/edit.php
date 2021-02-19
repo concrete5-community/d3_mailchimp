@@ -1,14 +1,14 @@
-<?php  
+<?php   
 defined('C5_EXECUTE') or die("Access Denied.");
 ?>
 
 <div class="form-group">
-	<?php  
+	<?php   
 	echo $form->label('list_id', t('List') .' *');
 	?>
 
 	<div class="input">
-		<?php  
+		<?php   
 		$options = $controller->getListOptions();
 		
 		if (count($options) === 0) {
@@ -21,12 +21,12 @@ defined('C5_EXECUTE') or die("Access Denied.");
 </div>
 
 <div class="form-group">
-	<?php  
+	<?php   
 	echo $form->label('subscribe_action', t('Subscribe action') .' *');
 	?>
 	
 	<div class="input">
-		<?php  
+		<?php   
 		echo $form->select('subscribe_action', array(
 			'subscribed' => t('Subscribe without verification email'), 
 			'pending' => t('Subscribe with verification email')
@@ -36,17 +36,17 @@ defined('C5_EXECUTE') or die("Access Denied.");
 </div>
 
 <div class="form-group">
-	<?php  
+	<?php   
 	echo $form->label('merge_fields', t('Merge fields (comma separated)'));
 	?>
 	
 	<div class="input">
-		<?php  
+		<?php   
 		echo $form->text('merge_fields', $merge_fields, array('placeholder' => 'By default: FNAME, LNAME'));
 		?>
 	</div>
 </div>
 
 <p>
-	<?php   echo t('If you have custom merge fields you can override the view.php and add the merge fields above.') ?>
+	<?php    echo t('If you have custom merge fields you can override the view.php and add the merge fields above.') ?>
 </p>

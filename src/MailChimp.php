@@ -1,7 +1,8 @@
-<?php   
+<?php    
 namespace Concrete\Package\D3Mailchimp\Src;
 
 use Illuminate\Support\Collection;
+use Exception;
 
 /**
  * MailChimp API v3
@@ -76,7 +77,7 @@ class MailChimp
 		$dataCenter = substr($this->api_key, strpos($this->api_key,'-')+1);
 		
 		if (empty($dataCenter)) {
-			throw new \Exception("Invalid API key");
+			throw new Exception("Invalid API key");
 		}
 		
 		$url = 'https://' . $dataCenter . '.api.mailchimp.com/3.0/'.$endpoint;
@@ -100,7 +101,7 @@ class MailChimp
 	    curl_close($ch);
 		
 		if ($http_code != 200) {
-			throw new \Exception($result['detail']);
+			throw new Exception($result['detail']);
 		}
 		
         $collection = new Collection(

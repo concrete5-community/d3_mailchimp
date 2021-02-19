@@ -1,0 +1,11 @@
+.d3-mailchimp .form-control {
+	max-width: 300px;
+}
+
+.d3-mailchimp div + div {
+	margin-top: 5px;
+}
+
+.d3-mailchimp .button {
+	margin-top: 5px;
+}

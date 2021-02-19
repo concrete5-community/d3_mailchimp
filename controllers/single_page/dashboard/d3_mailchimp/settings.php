@@ -1,10 +1,10 @@
-<?php   
+<?php    
 namespace Concrete\Package\D3Mailchimp\Controller\SinglePage\Dashboard\D3Mailchimp;
 
 use Concrete\Package\D3Mailchimp\Src\MailChimp;
 use Config;
-
 use Concrete\Core\Page\Controller\DashboardPageController;
+use Core;
 
 class Settings extends DashboardPageController
 {
@@ -23,8 +23,8 @@ class Settings extends DashboardPageController
 	
 	public function on_start()
 	{
-		$this->error = \Core::make('helper/validation/error');
-		$this->cfg = \Core::make('config/database');
+		$this->error = Core::make('helper/validation/error');
+		$this->cfg = Core::make('config/database');
 		
 		$this->mc = new MailChimp($this->cfg->get('d3_mailchimp.settings.api_key'));
 		
@@ -33,12 +33,12 @@ class Settings extends DashboardPageController
 	
 	public function save() 
 	{
-		if (\Core::make('token')->validate('d3_mailchimp.settings.save')) {
+		if (Core::make('token')->validate('d3_mailchimp.settings.save')) {
 			$this->cfg->save('d3_mailchimp.settings.api_key', $this->post('api_key'));
 			
 			$this->redirect($this->action('save_success'));
 		} else {
-			$this->error->add(\Core::make('token')->getErrorMessage());
+			$this->error->add(Core::make('token')->getErrorMessage());
 		}
 	}
 }
