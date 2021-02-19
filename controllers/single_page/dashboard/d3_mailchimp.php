@@ -1,4 +1,4 @@
-<?php    
+<?php  
 namespace Concrete\Package\D3Mailchimp\Controller\SinglePage\Dashboard;
 
 use Concrete\Core\Page\Controller\DashboardPageController;

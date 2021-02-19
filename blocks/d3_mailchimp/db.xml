@@ -1,16 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<schema
-  xmlns="http://www.concrete5.org/doctrine-xml/0.5"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.concrete5.org/doctrine-xml/0.5 http://concrete5.github.io/doctrine-xml/doctrine-xml-0.5.xsd">
+<?php xml version="1.0"?>
+<schema version="0.3">
 	<table name="btD3Mailchimp">
-		<field name="bID" type="integer" size="10">
+		<field name="bID" type="I">
 			<unsigned/>
-			<autoincrement/>
 			<key/>
 		</field>
-		<field name="list_id" type="string" size="15"></field>
-		<field name="subscribe_action" type="string" size="20"></field>
-		<field name="merge_fields" type="string" size="255"></field>
+		<field name="list_id" type="C" size="15"></field>
+		<field name="subscribe_action" type="C" size="20"></field>
+		<field name="merge_fields" type="C" size="255"></field>
 	</table>
 </schema>

@@ -1,4 +1,4 @@
-<?php    
+<?php     
 namespace Concrete\Package\D3Mailchimp\Src;
 
 use Illuminate\Support\Collection;
