@@ -1,0 +1,137 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: d3_mailchimp 2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2016-11-16T12:29:08+00:00\n"
+"PO-Revision-Date: 2017-01-20 10:55+0100\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.11\n"
+"Last-Translator: \n"
+"Language: de\n"
+
+#: packages/d3_mailchimp/controller.php:26
+msgid "Form - MailChimp Subscribe"
+msgstr "Form - MailChimp abonnieren"
+
+#: packages/d3_mailchimp/controller.php:31
+msgid "Subscribe to MailChimp lists"
+msgstr "MailChimp Listen abonnieren"
+
+#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:40
+msgid "MailChimp subscribe"
+msgstr "Mailchimp abbonieren"
+
+#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:59
+msgid "No list has been selected"
+msgstr "Keine Liste es wurde ausgewählt"
+
+#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:76
+msgid "Invalid email address"
+msgstr "Bitte geben Sie eine richtige E-Mail Adresse an."
+
+#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:80
+msgid "Invalid token"
+msgstr "Ungültiges Token"
+
+#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:112
+msgid "You are already subscribed to this list"
+msgstr "Sie sind bereits auf diese Liste abonniert."
+
+#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:115
+msgid "You are already subscribed. Please confirm the subscription email."
+msgstr ""
+"Sie sind bereits angemeldet. Bitte bestätigen Sie die Abonnement E-Mail."
+
+#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:118
+msgid "This email address bounced. Please use another email address"
+msgstr ""
+"Diese E-Mail-Adresse wurde zurückgeschickt. Bitte verwenden Sie eine "
+"andere E-Mail-Adresse"
+
+#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:130
+msgid "Thanks for your subscription!"
+msgstr "Vielen Dank für deine Anmeldung!"
+
+#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:132
+msgid ""
+"Please click on the link in the confirmation email to verify your "
+"subscription."
+msgstr "Bitte den Link in Bestätigungs E-Mail klicken."
+
+#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:135
+msgid "Something went wrong. Error: %s"
+msgstr "Etwas ist schiefgegangen. Error: %s"
+
+#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:187
+msgid "Lists not available"
+msgstr "Keine Listen"
+
+#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:199
+msgid "Subscribe without verification email"
+msgstr "Abonniere ohne Verifizierungs-E-Mail"
+
+#: packages/d3_mailchimp/blocks/d3_mailchimp/controller.php:200
+msgid "Subscribe with verification email"
+msgstr "Abonniere mit Verifizierungs-E-Mail"
+
+#: packages/d3_mailchimp/blocks/d3_mailchimp/edit.php:5
+msgid "Please <a href=\"%s\">add an API key</a> first."
+msgstr ""
+"Bitte <a href=\"%s\">Bitte fügen Sie zuerst einen API-Schlüssel</a> hinzu."
+
+#: packages/d3_mailchimp/blocks/d3_mailchimp/edit.php:10
+msgid "<a target=\"_blank\" href=\"%s\">Please create a MailChimp list.</a>"
+msgstr ""
+"<a target=\"_blank\" href=\"%s\">Bitte erstellen Sie eine MailChimp-Liste."
+"</a>"
+
+#: packages/d3_mailchimp/blocks/d3_mailchimp/edit.php:17
+msgid "List"
+msgstr "Liste"
+
+#: packages/d3_mailchimp/blocks/d3_mailchimp/edit.php:29
+msgid "Subscribe action"
+msgstr "Abonnieren Aktionen"
+
+#: packages/d3_mailchimp/blocks/d3_mailchimp/edit.php:43
+msgid "Merge fields (comma separated)"
+msgstr "Felder zusammenführen (durch Kommas getrennt)"
+
+#: packages/d3_mailchimp/blocks/d3_mailchimp/edit.php:46
+msgid ""
+"Developers: If you have custom merge fields you need to override view.php."
+msgstr ""
+"Entwickler: Wenn Sie benutzerdefinierte Seriendruckfelder haben, müssen "
+"Sie die view.php überschreiben."
+
+#: packages/d3_mailchimp/blocks/d3_mailchimp/view.php:23
+msgid "First name"
+msgstr "Vorname"
+
+#: packages/d3_mailchimp/blocks/d3_mailchimp/view.php:31
+msgid "Last name"
+msgstr "Nachname"
+
+#: packages/d3_mailchimp/blocks/d3_mailchimp/view.php:40
+msgid "Email address"
+msgstr "E-Mail Adresse"
+
+#: packages/d3_mailchimp/blocks/d3_mailchimp/view.php:47
+msgid "Submit"
+msgstr ""
+
+#: packages/d3_mailchimp/controllers/single_page/dashboard/d3_mailchimp/settings.php:17
+msgid "Settings saved"
+msgstr ""
+
+#: packages/d3_mailchimp/single_pages/dashboard/d3_mailchimp/settings.php:12
+msgid "API key"
+msgstr ""
+
+#: packages/d3_mailchimp/single_pages/dashboard/d3_mailchimp/settings.php:21
+msgid "Save"
+msgstr ""
