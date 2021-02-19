@@ -61,11 +61,11 @@ class Controller extends BlockController
 			}
 		
 			if (!$error->has()) {
-				$data = [
+				$data = array(
 					'email' => $this->post($this->bID.'email_address'),
 					'status' => $this->subscribe_action,
 					'merge_fields' => $this->getMergeFieldData()				
-				];
+                );
 			
 				$subscriptionStatus = $this->mc->getSubscriptionStatus($this->list_id, $data);
 			

@@ -26,9 +26,9 @@ class MailChimp
 		$email_hash = md5(strtolower($data['email']));
 		$endpoint = 'lists/' . $list_id . '/members/' . $email_hash;
 		
-		$arguments = json_encode([
-	        'email_address' => $data['email'],
-	    ]);
+		$arguments = json_encode(array(
+	        'email_address' => $data['email']
+        ));
 		
 		try {
 			$result = $this->sendRequest($endpoint, $arguments, 'GET');			
@@ -49,11 +49,11 @@ class MailChimp
 		$email_hash = md5(strtolower($data['email']));
 		$endpoint = 'lists/' . $list_id . '/members/' . $email_hash;
 		
-		$arguments = json_encode([
+		$arguments = json_encode(array(
 	        'email_address' => $data['email'],
 	        'status'        => $data['status'],
 	        'merge_fields'  => $data['merge_fields']
-	    ]);
+        ));
 		
 		$this->sendRequest($endpoint, $arguments, 'PUT');
 	}
@@ -84,7 +84,7 @@ class MailChimp
 		
 		$ch = curl_init($url);
 	    curl_setopt($ch, CURLOPT_USERPWD, 'user:' . $this->api_key);
-	    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+	    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 	    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
