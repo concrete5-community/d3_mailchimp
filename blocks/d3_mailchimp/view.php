@@ -1,5 +1,7 @@
 <?php
 
+use Concrete\Core\Error\ErrorList\Formatter\StandardFormatter;
+
 defined('C5_EXECUTE') or die('Access Denied.');
 
 /** @var Concrete\Core\Validation\CSRF\Token $token */
@@ -12,8 +14,9 @@ defined('C5_EXECUTE') or die('Access Denied.');
 
 <div class="d3-mailchimp" data-block-id="<?php echo $bID; ?>">
 	<?php 
-	if (isset($errors)) {
-		$errors->output();
+	if (isset($errors) && $errors->has()) {
+		$formatter = new StandardFormatter($errors);
+		echo $formatter->render();
 	}
 	
 	if (isset($message)) {
