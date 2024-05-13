@@ -4,6 +4,7 @@ namespace Concrete\Package\D3Mailchimp\Controller\SinglePage\Dashboard\System\Ma
 
 use Concrete\Core\Config\Repository\Repository;
 use Concrete\Core\Page\Controller\DashboardPageController;
+use Concrete\Core\Routing\RedirectResponse;
 
 class Mailchimp extends DashboardPageController
 {
@@ -22,7 +23,7 @@ class Mailchimp extends DashboardPageController
 
         if ($token->validate('d3_mailchimp.settings.save')) {
             $config->save('d3_mailchimp.settings.api_key',  $this->post('api_key'));
-            $this->redirect($this->action('save_success'));
+            return new RedirectResponse($this->action('save_success'));
         } else {
             $this->error->add($token->getErrorMessage());
         }

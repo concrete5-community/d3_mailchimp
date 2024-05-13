@@ -4,18 +4,18 @@ namespace Concrete\Package\D3Mailchimp;
 
 use A3020\D3Mailchimp\Installer;
 use Concrete\Core\Package\Package;
-use Concrete\Core\Support\Facade\Package as PackageFacade;
+use Concrete\Core\Package\PackageService;
 
 class Controller extends Package
 {
     protected $pkgHandle = 'd3_mailchimp';
-    protected $appVersionRequired = '8.0';
-    protected $pkgVersion = '3.1.1';
+    protected $appVersionRequired = '9.0';
+    protected $pkgVersion = '4.0.0';
     protected $pkgAutoloaderRegistries = [
         'src/D3Mailchimp' => '\A3020\D3Mailchimp',
     ];
 
-    public function getPackageName()
+	public function getPackageName()
     {
         return t('MailChimp Subscribe');
     }
@@ -35,7 +35,7 @@ class Controller extends Package
 
     public function upgrade()
     {
-        $pkg = PackageFacade::getByHandle($this->pkgHandle);
+	    $pkg = $this->app->make(PackageService::class)->getByHandle($this->pkgHandle);
 
         $installer = $this->app->make(Installer::class);
         $installer->install($pkg);

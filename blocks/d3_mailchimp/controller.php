@@ -10,6 +10,7 @@ use Concrete\Core\Block\BlockController;
 use Concrete\Core\Config\Repository\Repository;
 use Concrete\Core\Editor\LinkAbstractor;
 use Concrete\Core\Http\Request;
+use Concrete\Core\Validator\String\EmailValidator;
 use Exception;
 
 class Controller extends BlockController
@@ -83,7 +84,7 @@ class Controller extends BlockController
         }
     }
     
-    public function action_submit($bId = false)
+    public function action_submit($bID = false)
     {
         if (!Request::isPost()) {
             $this->view();
@@ -91,7 +92,8 @@ class Controller extends BlockController
             return;
         }
 
-        if ($bId !== $this->bID) {
+        $bID = (int) $bID;
+        if ($bID !== $this->bID) {
             $this->view();
 
             return;
@@ -101,7 +103,8 @@ class Controller extends BlockController
             $this->error->add(t('Invalid token'));
         }
 
-        if (!$this->app->make('helper/validation/strings')->email($this->post('email_address'))) {
+	    $validator = $this->app->make(EmailValidator::class, ['testMXRecord' => false, 'strict' => false]);
+        if (!$validator->isValid($this->post('email_address'))) {
             $this->error->add(t('Invalid email address'));
         }
 
@@ -120,6 +123,12 @@ class Controller extends BlockController
 
     public function add()
     {
+    	$this->set('listId', null);
+    	$this->set('subscribeAction', null);
+    	$this->set('styling', null);
+    	$this->set('showTermsCheckbox', null);
+    	$this->set('acceptTermsText', null);
+    	$this->set('mergeFields', null);
         $this->addEdit();
     }
 
